@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.css" />
+    <style>
+        body {
+            background: #eee;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        /* Style for post container */
+        .post {
+          display: flex;
+          height: 88vh;
+          max-width: 701px;
+          min-height: 533px;
+          margin: 10px auto;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 10px;
+          background-color: #fff;
+          overflow: hidden;
+          flex-direction: column;
+          flex-wrap: nowrap;
+          align-items: center;
+          justify-content: flex-start;
+        }
+        /* Style for image slider container */
+        .swiper-container2 {
+          overflow-x: clip;
+          max-width: 438px;
+          max-height: 438px;
+          height: 75vw;
+          width: 75vw;
+            
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .swiper-slide {
+          max-height: 438px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: nowrap;
+          flex-direction: row;
+            background-position: center;
+            background-size: cover;
+            background-color: #fff;
+          
+            height: 75vw;
+            
+            overflow: auto;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .slide-content {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            max-height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .swiper-slide img {
+            display: block;
+            width: auto;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* Style for post description */
+        .description {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        .swiper-pagination {
+          bottom: var(--swiper-pagination-bottom, 0px) !important;
+            position: relative;
+        }
+      
+        /* Style for modal overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+           
+            z-index: 9999; /* ensure modal is on top of other elements */
+        }
+        /* Style for modal content */
+        .modal-content {
+            width: 100vw;
+            height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 10000; /* ensure modal content is on top of overlay */
+        }
+        /* Style for close button */
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+              z-index: 10001;
+        }
+      .swiper-backface-hidden .swiper-slide {
+      border-radius: 0px;
+      }
+      .swiper-slide.swiper-slide-active {
+          border-radius: 16px;
+      }
+      .swiper-slide:hover {
+        border-radius: 0px !important;
+      }
+      @media (max-width: 580px) {
+       
+       .post {
+         min-width: 290px;
+         min-height: 288px;
+         height: 93vh;
+         max-width: 701px;
+         max-height: 100vw;
+
+         
+       }
+      }
+      
+    </style>
+</head>
+<body>
+    <div id="postsContainer"></div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Function to fetch content from folders
+        async function fetchPosts() {
+            const postsContainer = document.getElementById('postsContainer');
+            // List of folder names (s1, s2, s3, etc.)
+            const folderNames = ['s1', 's2', 's3']; // Add more folder names as needed
+            // Loop through each folder
+            for (const folderName of folderNames) {
+                const post = await fetchPost(folderName);
+                postsContainer.innerHTML += post;
+            }
+            // Initialize Swiper for each post
+            var swiper = new Swiper(".swiper-container2", {
+              grabCursor: true,
+              centeredSlides: true,
+              slidesPerView: "1",
+              spaceBetween: 0,
+              direction: 'horizontal',
+              loop: false,
+                pagination: {
+                    el: ".swiper-pagination",
+                },
+            });
+        }
+        // Function to fetch content from a specific folder
+        async function fetchPost(folderName) {
+            const response = await fetch(folderName + '/description.txt');
+            const description = await response.text();
+            // Get image URLs from the folder
+            const imageFiles = await fetch(folderName + '/images.json').then(response => response.json());
+            const imagesHTML = imageFiles.map(imageFile => `<div class="swiper-slide"><img src="${folderName}/${imageFile}" alt="Image"></div>`).join('');
+            // Generate HTML for the post
+            const postHTML = `
+                <div class="post">
+                    <div class="swiper-container2">
+                        <div class="swiper-wrapper">${imagesHTML}</div>
+                        <div class="swiper-pagination"></div>                      
+                           
+                            
+                            <div class="description ">${description}  <button class="full-project-button" onclick="showFullProject('${folderName}')">See More</button></div>
+                        </div>
+                    </div>
+                   
+            `;
+            return postHTML;
+        }
+        // Call fetchPosts function to load posts on page load
+        window.onload = fetchPosts;
+
+        async function showFullProject(folderName) {
+            const projectHTML = await fetch(`${folderName}/project.html`).then(response => response.text());
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = projectHTML;
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.style.display = 'block';
+            // Disable scrolling on the body
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideModal() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.style.display = 'none';
+            // Enable scrolling on the body
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+    <!-- Modal overlay -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content" id="modalContent">
+            <!-- Content will be dynamically loaded here -->
+        </div>
+        <button class="modal-close" onclick="hideModal()">Close</button>
+    </div>
+</body>
+</html>
+    

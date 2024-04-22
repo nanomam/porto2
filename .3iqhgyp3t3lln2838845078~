@@ -1,0 +1,43 @@
+
+
+    
+
+  
+
+    const slides = document.querySelectorAll('.swiper-slide');
+    const files = [
+      "p1/p1.html", // Path to content for slide 1
+      "p2/p2.html", // Path to content for slide 2
+      "p3/p3.html", // Path to content for slide 3
+    ];
+
+    // Load content for the first slide on page load
+    fetchContent(slides[0], files[0]);
+
+    function fetchContent(slideElement, fileName) {
+      fetch(fileName)
+        .then(response => response.text())
+        .then(data => {
+          slideElement.innerHTML = data;
+        })
+        .catch(error => {
+          console.error(`Error loading content for ${fileName}:`, error);
+        });
+    }
+
+    // Load content for other slides when they become active
+    swiper.on('slideChange', function () {
+      const currentSlideIndex = this.activeIndex;
+      const currentSlide = slides[currentSlideIndex];
+      const contentFileName = files[currentSlideIndex];
+
+      // Check if content is already loaded, skip fetching if so
+      if (!currentSlide.hasAttribute('data-loaded')) {
+        fetchContent(currentSlide, contentFileName);
+        currentSlide.setAttribute('data-loaded', true); // Mark slide as loaded
+      }
+    });
+
+
+  
+  

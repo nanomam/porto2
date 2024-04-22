@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Swiper demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+  <!-- Demo styles -->
+  <style>
+    body {
+      background: #eee;
+      font-family: "Almarai", sans-serif;
+      font-weight: 300;
+      font-style: normal;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+      background-image: url(8.webp);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      backdrop-filter: blur(3px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .swiper-h {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-wrap: nowrap;
+      width: 100vw;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .swiper-wrapper {
+      flex: 1;
+    }
+
+    .vv {
+      min-width: 350px;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+      background-position: center;
+      background-size: cover;
+      background-color: #fff;
+      width: 80vw;
+      height: auto;
+      margin-bottom: 12vh;
+      margin-top: 2.5vh;
+      overflow: auto;
+      border-radius: 20px;
+    }
+
+    .slide-content {
+      max-height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .swiper-pagination {
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      justify-content: center;
+      text-align: center;
+      width: 100vw !important;
+      transform: translateY(7px);
+      flex: 1;
+      padding-top: 6px;
+    }
+
+    .swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet,
+    .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+      background-image: url(icon1.svg);
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 8vh;
+      height: 8vh;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+      border-radius: 10px;
+      margin: 0 var(--swiper-pagination-bullet-horizontal-gap, 4px);
+    }
+
+    .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-main {
+      opacity: 1 !important;
+      background-image: none !important;
+      background-color: #fff;
+      width: 14vh !important;
+      padding-left: 50px;
+      padding-right: 50px;
+      color: #000;
+      font-size: 3vh;
+      font-weight: bold;
+      text-align: center;
+      transform: scale(1);
+    }
+
+    .scaled-active {
+      transform: scale(1) !important;
+      margin: 5px !important;
+      opacity: 1 !important;
+    }
+
+    .scaled-adjacent {
+      transform: scale(0.8) !important;
+      margin: 5px !important;
+      opacity: 0.5;
+    }
+
+    .scaled-further {
+      transform: scale(0.6) !important;
+      margin: 5px !important;
+      opacity: 0.5;
+    }
+
+    .swiper-pagination2 {
+      bottom: var(--swiper-pagination-bottom, -4px) !important;
+      display: flex;
+      z-index: 55;
+      position: relative;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .description {
+      text-overflow: ellipsis;
+      margin: 14px 1px 1px 1px;
+      position: relative;
+    }
+
+    .swiper-v {
+      max-width: 455px;
+      max-height: 498px;
+      min-width: 227px;
+      background-color: whitesmoke;
+      width: 89%;
+      height: auto;
+    }
+
+    .sv {
+      background-color: whitesmoke;
+    }
+
+    #pagination-bullet {
+      background-image: none;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 7px;
+      height: 7px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+      /* opacity: 0.5; */
+      border-radius: 10px;
+      margin: 0 var(--swiper-pagination-bullet-horizontal-gap, 4px);
+    }
+
+    .sh {
+      display: grid;
+      justify-content: center;
+    }
+
+    .swiper-button-prev:after,
+    .swiper-button-next:after {
+      padding: 12px 24px 12px 14px;
+      font-family: swiper-icons;
+      font-size: 30px;
+    }
+
+    .splash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      background-color: #333;
+      background-image: url(8.webp);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      backdrop-filter: blur(3px);
+      /* Set your background color */
+
+      align-content: center !important;
+      justify-content: center !important;
+      overflow: hidden;
+      /* Set a high z-index to overlay other content */
+      z-index: 10000000;
+      transition: ease-in-out, transform 0.4s ease-out, border-radius 0.3s ease-out, height 0.3s;
+    }
+
+    @keyframes play600 {
+      0% {
+        background-position: 0px 0px;
+      }
+
+      100% {
+        background-position: -357300px 0px;
+      }
+    }
+
+    .shapeshifter {
+      animation-duration: 10000ms;
+      animation-timing-function: steps(300);
+      width: 1191px;
+      height: 1194px;
+      background-repeat: no-repeat;
+    }
+
+    .shapeshifter.play {
+      animation-name: play600;
+      animation-iteration-count: infinite;
+    }
+
+    .language-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .language-selection {
+      font-weight: 700;
+      text-align: center;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .loader {}
+
+    .loader.hhz {
+      z-index: 11111;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-top: 4px solid #000;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    .loader.hhx {
+      background-color: whitesmoke;
+      height: 100%;
+      width: 100%;
+      z-index: 1111;
+      position: fixed;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loaded .loader {
+      display: none;
+    }
+
+    .modal-overlay {
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+        overflow-clip-margin: border-box;
+        margin: 0;
+        background-color: #03131e47;
+        padding: 0;
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999;
+     
+      transform: scale(0);
+        transition: all ease 0.3s;
+    }
+
+    /* Style for modal content */
+    .modal-content {
+        overflow: auto;
+        margin: 3%;
+        width: 94%;
+        height: 94%;
+        position: relative;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 10000;
+    }
+
+    /* Style for close button */
+    .modal-close {
+      box-shadow: inset 1px 0px 9px 0px #0000004d;
+        transition: all 0.5s;
+        background: #004c80;
+        border-radius: 999px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 24px;
+        opacity: 1;
+        outline: 0 solid transparent;
+        padding: 8px 18px;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        width: fit-content;
+        word-break: break-word;
+        border: 0;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        bottom: 10px;
+        left: 50%;
+        cursor: pointer;
+        z-index: 10001;
+    }
+    .modal-close:hover {
+        transform: translate(-50%, -50%) scale(1.04);
+        box-shadow: #004c80 0 10px 20px -10px;
+        background: #5E5DF0;
+        bottom: 10px;
+        left: 50%;
+    }
+    .langb, .langa {
+
+      margin-top: 9px;
+      transition: all 0.5s;
+      background: #004c80;
+      border-radius: 999px;
+      box-sizing: border-box;
+      color: #FFFFFF;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 16px;
+      opacity: 1;
+      outline: 0 solid transparent;
+      padding: 8px 12px;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      width: fit-content;
+      word-break: break-word;
+      border: 0;
+   
+    }
+    .langa {
+       margin-left: 4px;
+    }
+     .langb:hover, .langa:hover {
+
+       box-shadow: #004c80 0 10px 20px -10px;
+       transform: scale(1.04);
+       background: #5E5DF0;
+     }
+  </style>
+</head>
+
+<body>
+  <div
+    style="background: radial-gradient(ellipse at center, rgb(0 0 0 / 0%) 63%, rgb(0 0 0) 100%);z-index: 0;height: 100vh;width: 100vw;background-size: 100vw;position: fixed;">
+  </div>
+  <div class="splash">
+    <div
+      style="background: radial-gradient(ellipse at center, rgb(0 0 0 / 0%) 63%, rgb(0 0 0) 100%); backdrop-filter: blur(3px); z-index: 0; height: 100vh; width: 100vw; background-size: 100vw; position: fixed;">
+    </div>
+    <div class="shapeshifter play" style="z-index: 47; scale: calc(1 / 9); background-image: url(sprite_30fps.svg)">
+    </div>
+  </div>
+  <div class="language-layer" id="languageLayer">
+    <div class="language-selection">
+      <p>Please select CV language:</p>
+      <p>:يرجى اختيار لغة الـسيرة الذاتية</p>
+      <button class="langb" onclick="setLanguage('english')">English</button>
+      <button class="langa" onclick="setLanguage('arabic')">Arabic</button>
+    </div>
+  </div>
+
+  <!-- Swiper -->
+  <div class="swiper mySwiper swiper-h">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide vv">
+        <div class="slide-content" id="slide1" data-name="لمحة عنّي"> </div>
+      </div>
+      <div class="swiper-slide vv cc">
+        <div class="loader hhz"></div>
+        <div class="loader hhx"></div>
+        <div class="slide-content sh" id="slide2" data-name="معرض أعمالي"> </div>
+      </div>
+      <div class="swiper-slide vv ff">
+        <div class="loader hhz"></div>
+        <div class="loader hhx"></div>
+        <div class="slide-content" id="slide3" data-name="شجرة التواصل"> </div>
+      </div>
+    </div>
+    <div class="swiper-pagination ppg11"></div>
+  </div>
+  <script>
+    async function showFullProject(folderName) {
+      const projectHTML = await fetch(`${folderName}/project.html`).then(response => response.text());
+      const modalContent = document.getElementById('modalContent');
+      modalContent.innerHTML = projectHTML;
+      const modalOverlay = document.getElementById('modalOverlay');
+      modalOverlay.style.display = 'flex';
+       setTimeout(function () {
+      modalOverlay.style.transform = 'scale(1)';
+         }, 100); 
+       modalOverlay.style.height = '100vh';
+      // Disable scrolling on the body
+      document.body.style.overflow = 'hidden';
+    }
+
+    function hideModal() {
+      const modalOverlay = document.getElementById('modalOverlay');
+      setTimeout(function () {
+        modalOverlay.style.display = 'none';    
+      }, 600);      
+      // Enable scrolling on the body
+      document.body.style.overflow = 'auto';
+      modalOverlay.style.transform = 'scale(0)';
+      modalOverlay.style.borderRadius = '100%';
+      modalOverlay.style.height = '100vw';
+
+      
+     
+      
+    }
+  </script>
+
+  <!-- Modal overlay -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content" id="modalContent">
+      <!-- Content will be dynamically loaded here -->
+    </div>
+    <button class="modal-close" onclick="hideModal()">Close</button>
+  </div>
+  <script>
+    window.addEventListener('load', function () {
+      var splash = document.querySelector('.splash');
+      setTimeout(function () {
+        splash.style.transform = 'scale(0)'; // Shrink the splash screen
+        splash.style.borderRadius = '100%';
+        splash.style.height = '100vw';
+      }, 3000);
+      setTimeout(function () {
+        splash.style.display = 'none'; // Hide the splash screen after shrinking
+      }, 11000); // Adjust the time as needed to match the transition duration
+    });
+  </script>
+  <script src="lang.js"></script>
+  <script src="responsive.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="swiper.js"></script>
+  <script src="s2.js"></script>
+</body>
+
+</html>

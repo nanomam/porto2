@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.css" />
+  <style scoped>
+    /* Your styles here */
+  </style>
+</head>
+<body>
+  <div id="slide2">
+    <div class="post">
+      <div class="swiper mySwiper2 swiper-v">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide sv"><img src="1.jpg" alt="Image"></div>
+          <div class="swiper-slide sv"><img src="2.jpg" alt="Image"></div>
+          <div class="swiper-slide sv"><img src="3.jpg" alt="Image"></div>
+        </div>
+        <div class="swiper-pagination2"></div>
+      </div>
+      <div class="description">
+        jlhiuiugygiugiugigiugui
+        <button class="load-more-button" onclick="loadMorePosts()">See More</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="additional-posts"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    var swiper2 = new Swiper(".mySwiper2", {
+      centeredSlides: true,
+      slidesPerView: "auto",
+      spaceBetween: 70,
+      direction: 'horizontal',
+      loop: false,
+      pagination: {
+        el: ".swiper-pagination2",
+        clickable: true
+      },
+    });
+
+    function loadMorePosts() {
+      // Fetch the HTML content of the next post
+      fetch("post2.html")
+        .then(response => response.text())
+        .then(htmlContent => {
+          // Append the new post content to the container
+          const additionalPosts = document.getElementById("additional-posts");
+          additionalPosts.innerHTML += htmlContent;
+
+          // Initialize Swiper for all loaded posts' containers (class-based)
+          const swiperContainers = additionalPosts.querySelectorAll(".swiper.mySwiper2");
+          swiperContainers.forEach(container => {
+            new Swiper(container, {
+              centeredSlides: true,
+              slidesPerView: "auto",
+              spaceBetween: 70,
+              direction: 'horizontal',
+              loop: false,
+              pagination: {
+                el: ".swiper-pagination2",
+                clickable: true
+              },
+            });
+          });
+        })
+        .catch(error => {
+          console.error("Error fetching post:", error);
+          // Handle errors gracefully, like showing an error message
+        });
+    }
+  </script>
+</body>
+</html>
