@@ -53,9 +53,7 @@ function initializeSwiper2() {
     direction: 'horizontal',
     loop: false,
     lazy: true,
-    zoom: {
-      maxRatio: 5,
-    },
+    zoom: true,
     pagination: {
       el: ".swiper-pagination2",
       clickable: true

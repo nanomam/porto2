@@ -10,6 +10,7 @@
     spaceBetween: 70,
     direction: 'horizontal',
     loop: false,
+    zoom: true,
     pagination: {
       el: ".swiper-pagination",
       clickable: true,
@@ -31,9 +32,7 @@
     direction: 'horizontal',
     loop: false,
     lazy: true,
-   zoom: {
-     maxRatio: 5,
-   },
+   zoom: true,
     pagination: {
       el: ".swiper-pagination2",
       clickable: true
