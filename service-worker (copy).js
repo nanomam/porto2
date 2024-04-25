@@ -1,4 +1,4 @@
-const CACHE_NAME = 'my-site-cache-v2';
+const CACHE_NAME = 'my-site-cache-v1';
 const urlsToCache = [
   '/',
   '/sprite_30fps.svg',
@@ -30,28 +30,7 @@ self.addEventListener('fetch', function(event) {
           return response;
         }
         return fetch(event.request);
-      })
+      }
+    )
   );
 });
-
-self.addEventListener('activate', function(event) {
-  // Delete old caches
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.filter(function(cacheName) {
-          return cacheName !== CACHE_NAME;
-        }).map(function(cacheName) {
-          return caches.delete(cacheName);
-        })
-      );
-    })
-  );
-});
-
-// Recache every 3 hours
-setInterval(function() {
-  caches.open(CACHE_NAME).then(function(cache) {
-    cache.addAll(urlsToCache);
-  });
-}, 3 * 60 * 60 * 1000); // 3 hours in milliseconds
