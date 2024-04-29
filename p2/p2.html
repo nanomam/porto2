@@ -36,6 +36,7 @@
     position: relative;
 }
 button.full-project-button {
+  font-family: unset;
   margin-top: 9px;
   transition: all 0.5s;
   background: #004c80;
@@ -56,6 +57,7 @@ button.full-project-button {
   word-break: break-word;
   border: 0;
   margin-left: 4px;
+  margin-right: 4px;
 }
 button.full-project-button:hover {
     box-shadow: #004c80 0 10px 20px -10px;
@@ -65,8 +67,8 @@ button.full-project-button:hover {
 </style>
 <div class="containerxx5s">
   <div class="pxost">
-    <div class="swiper mySwiper2 swiper-v">
-      <div class="swiper-wrapper">
+    <div class="swiper mySwiper2 swiper-v" data-swiper-observer="true">
+      <div class="swiper-wrapper wrap2 swiper-slide-zoomed">
         <div class="swiper-slide sv"><img src="p2/s1/1.jpg" alىt="Icmage" loading="lazy"></div>
         <div class="swiper-slide sv"><img src="p2/s1/2.jpg" alt="Idmage" loading="lazy"></div>
         <div class="swiper-slide sv"><img src="p2/s1/3.jpg" alt="Ihmage" loading="lazy"></div>
@@ -74,8 +76,8 @@ button.full-project-button:hover {
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
       <div class="swiper-pagination2"></div>
-      <div class="description ">شعار نموذج الإعمارش
-        <button class="full-project-button" onclick="showFullProject('p2/s1')">See More</button>
+      <div class="description" style="direction: rtl;">شعار نموذج الإعمار
+        <button class="full-project-button" onclick="showFullProject('p2/s1')">رؤية المزيد</button>
       </div>
     </div>
   </div>
@@ -96,17 +98,18 @@ button.full-project-button:hover {
   </div>
   <div class="pxost">
     <div class="swiper mySwiper2 swiper-v">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide sv"><img src="p2/s1/1.jpeg" alt="Icmage" loading="lazy"></div>
-        <div class="swiper-slide sv"><img src="p2/s1/2.jpeg" alt="Idmage" loading="lazy"></div>
-        <div class="swiper-slide sv"><img src="p2/s1/3.jpeg" alt="Ihmage" loading="lazy"></div>
+      <div class="swiper-wrapper wrap2">
+        <div class="swiper-slide sv"><img src="p2/s2/1.jpg" alt="Icmage" loading="lazy"></div>
+        <div class="swiper-slide sv"><img src="p2/s2/2.jpg" alt="Idmage" loading="lazy"></div>
+        <div class="swiper-slide sv"><img src="p2/s2/3.jpg" alt="Ihmage" loading="lazy"></div>
       </div>
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
       <div class="swiper-pagination2"></div>
       <div class="description ">jlhiuiugygiugiugigiugui
-        <button class="full-project-button" onclick="showFullProject('p2/s1')">See More</button>
+        <button class="full-project-button" onclick="showFullProject('p2/s2')">See More</button>
       </div>
     </div>
   </div>
+  
 </div>
