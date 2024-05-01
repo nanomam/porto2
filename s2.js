@@ -82,9 +82,31 @@ swiper.on('slideChange', function () {
     // Re-initialize pagination elements after slide 2 content is loaded
     if (currentSlideIndex === 1 && slideContentLoaded[currentSlideIndex]) {
       const paginationElements = document.querySelectorAll('.swiper-pagination2 span');
-      paginationElements.forEach((spanElement, index) => {
+      paginationElements.forEach((spanElement, index%3Cpath%20d%3D%22m0%202.5%20l2%20-1.5%20l1%200%20l2%201.5%20l1%200%22%20stroke%3D%22%23999%22%20fill%3D%22none%22%20stroke-width%3D%22.7%22%2F%3E__0">%3Cpath%20d%3D%22m0%202.5%20l2%20-1.5%20l1%200%20l2%201.5%20l1%200%22%20stroke%3D%22%23999%22%20fill%3D%22none%22%20stroke-width%3D%22.7%22%2F%3E__0">) => {
         spanElement.id = `pagination-bullet`;
       });
+      const fullProjectButtons = document.querySelectorAll('.full-project-button');
+
+      fullProjectButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          setTimeout(() => {
+            swiper3 = new Swiper(".mySwiper3", {
+              direction: "vertical", // Vertical scrolling
+              slidesPerView: "auto", // Adjust height based on content
+              lazy: true,
+                zoom: true,
+              freeMode: true, // Allow smooth user scrolling
+              scrollbar: {
+                el: ".swiper-scrollbar", // Selector for scrollbar element
+              },
+              mousewheel: true, // Enable mousewheel scrolling
+            });
+          }, 2000); // Delay of 2 seconds after button click
+        });
+      });
+
     }
-  }, 5000); // Delay for 5 seconds
+  }, 5000); 
+
+  
 });
