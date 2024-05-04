@@ -85,24 +85,7 @@ swiper.on('slideChange', function () {
       paginationElements.forEach((spanElement, index) => {
         spanElement.id = `pagination-bullet`;
       });
-      const fullProjectButtons = document.querySelectorAll('.full-project-button');
-
-      fullProjectButtons.forEach(button => {
-        button.addEventListener('click', () => {
-          setTimeout(() => {
-            swiper3 = new Swiper(".mySwiper3", {
-              direction: "vertical", // Vertical scrolling
-              slidesPerView: "auto", // Adjust height based on content
-              lazy: true,
-                zoom: true,
-          freemode: true,
-              grabCursor: true,
-              mousewheel: true,
-             
-            });
-          }, 5000); // Delay of 2 seconds after button click
-        });
-      });
+     
 
     }
   }, 5000); 

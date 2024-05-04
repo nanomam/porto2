@@ -8,6 +8,7 @@
     centeredSlides: true,
     slidesPerView: "auto",
     spaceBetween: 70,
+     lazy: true,
     direction: 'horizontal',
     keyboard: {
       enabled: true,
