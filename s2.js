@@ -95,13 +95,12 @@ swiper.on('slideChange', function () {
               slidesPerView: "auto", // Adjust height based on content
               lazy: true,
                 zoom: true,
-              freeMode: true, // Allow smooth user scrolling
-              scrollbar: {
-                el: ".swiper-scrollbar", // Selector for scrollbar element
-              },
-              mousewheel: true, // Enable mousewheel scrolling
+          freemode: true,
+              grabCursor: true,
+              mousewheel: true,
+             
             });
-          }, 2000); // Delay of 2 seconds after button click
+          }, 5000); // Delay of 2 seconds after button click
         });
       });
 

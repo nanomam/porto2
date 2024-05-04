@@ -9,6 +9,9 @@
     slidesPerView: "auto",
     spaceBetween: 70,
     direction: 'horizontal',
+    keyboard: {
+      enabled: true,
+    },
     loop: false,
     zoom: true,
     pagination: {
@@ -24,20 +27,7 @@
 
     }
   });
- var swiper2 = new Swiper(".mySwiper2", {
 
-     centeredSlides: true,
-    slidesPerView: "auto",
-    spaceBetween: 0,
-    direction: 'horizontal',
-    loop: false,
-    lazy: true,
-   zoom: true,
-    pagination: {
-      el: ".swiper-pagination2",
-      clickable: true
-    },
-  });
 
   function applyScalingClasses() {
     const activeIndex = swiper.activeIndex;

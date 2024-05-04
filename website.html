@@ -283,6 +283,14 @@
       position: fixed;
     }
 
+    .loader.hhxx {
+      background-color: whitesmoke;
+      height: 100%;
+      width: 100%;
+      z-index: 1111;
+      position: absolute;
+    }
+
     @keyframes spin {
       0% {
         transform: rotate(0deg);
@@ -298,74 +306,77 @@
     }
 
     .modal-overlay {
-        justify-content: center;
-        align-items: center;
-        flex-wrap: nowrap;
-        overflow-clip-margin: border-box;
-        margin: 0;
-        background-color: #03131e47;
-        padding: 0;
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100%;
-        z-index: 9999;
-     
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      overflow-clip-margin: border-box;
+      margin: 0;
+      background-color: #03131e47;
+      padding: 0;
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100%;
+      z-index: 9999;
+
       transform: scale(0);
-        transition: all ease 0.3s;
+      transition: all ease 0.3s;
     }
 
     /* Style for modal content */
     .modal-content {
-        overflow: auto;
-        margin: 3%;
-        width: 94%;
-        height: 94%;
-        position: relative;
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        z-index: 10000;
+      overflow: auto;
+      margin: 3%;
+      width: 94%;
+      height: 94%;
+      position: relative;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      z-index: 10000;
     }
 
     /* Style for close button */
     .modal-close {
       box-shadow: inset 1px 0px 9px 0px #0000004d;
-        transition: all 0.5s;
-        background: #004c80;
-        border-radius: 999px;
-        box-sizing: border-box;
-        color: #FFFFFF;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: 700;
-        line-height: 24px;
-        opacity: 1;
-        outline: 0 solid transparent;
-        padding: 8px 18px;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-        width: fit-content;
-        word-break: break-word;
-        border: 0;
-        position: absolute;
-        transform: translate(-50%, -50%);
-        bottom: 10px;
-        left: 50%;
-        cursor: pointer;
-        z-index: 10001;
+      transition: all 0.5s;
+      background: #004c80;
+      border-radius: 999px;
+      box-sizing: border-box;
+      color: #FFFFFF;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 24px;
+      opacity: 1;
+      outline: 0 solid transparent;
+      padding: 8px 18px;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      width: fit-content;
+      word-break: break-word;
+      border: 0;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      bottom: 10px;
+      left: 50%;
+      cursor: pointer;
+      z-index: 10001;
     }
+
     .modal-close:hover {
-        transform: translate(-50%, -50%) scale(1.04);
-        box-shadow: #004c80 0 10px 20px -10px;
-        background: #5E5DF0;
-        bottom: 10px;
-        left: 50%;
+      transform: translate(-50%, -50%) scale(1.04);
+      box-shadow: #004c80 0 10px 20px -10px;
+      background: #5E5DF0;
+      bottom: 10px;
+      left: 50%;
     }
-    .langb, .langa {
+
+    .langb,
+    .langa {
 
       margin-top: 9px;
       transition: all 0.5s;
@@ -386,17 +397,20 @@
       width: fit-content;
       word-break: break-word;
       border: 0;
-   
-    }
-    .langa {
-       margin-left: 4px;
-    }
-     .langb:hover, .langa:hover {
 
-       box-shadow: #004c80 0 10px 20px -10px;
-       transform: scale(1.04);
-       background: #5E5DF0;
-     }
+    }
+
+    .langa {
+      margin-left: 4px;
+    }
+
+    .langb:hover,
+    .langa:hover {
+
+      box-shadow: #004c80 0 10px 20px -10px;
+      transform: scale(1.04);
+      background: #5E5DF0;
+    }
   </style>
 </head>
 
@@ -440,41 +454,85 @@
     <div class="swiper-pagination ppg11"></div>
   </div>
   <script>
-    async function showFullProject(folderName) {
-      const projectHTML = await fetch(`${folderName}/project.html`).then(response => response.text());
-      const modalContent = document.getElementById('modalContent');
-      modalContent.innerHTML = projectHTML;
+    function showFullProject(path) {
       const modalOverlay = document.getElementById('modalOverlay');
+      const modalContent = document.getElementById('modalContent');
+
+      // Add styles to the modal overlay
       modalOverlay.style.display = 'flex';
-       setTimeout(function () {
-      modalOverlay.style.transform = 'scale(1)';
-         }, 100); 
-       modalOverlay.style.height = '100%';
-       modalOverlay.style.borderRadius = '0%';
+      setTimeout(function () {
+        modalOverlay.style.transform = 'scale(1)';
+      }, 100);
+      modalOverlay.style.height = '100%';
+      modalOverlay.style.borderRadius = '0%';
       // Disable scrolling on the body
       document.body.style.overflow = 'hidden';
+
+      // Load project.html dynamically
+      fetch(`${path}/project.html`)
+        .then(response => response.text())
+        .then(html => {
+          modalContent.innerHTML = html;
+
+          // Initialize Swiper after 1 second of content load
+          setTimeout(function () {
+            const swiper3 = new Swiper(".mySwiper3", {
+              direction: "vertical", // Vertical scrolling
+              slidesPerView: "auto", // Adjust height based on content
+              lazy: true,
+              zoom: true,
+              freemode: true,
+              grabCursor: true,
+              mousewheel: true
+            });
+
+            // Add class 'loaded' to elements with class 'modal-886'
+            const modal886 = document.querySelectorAll('.modal-content');
+            modal886.forEach(element => {
+              element.classList.add('loaded');
+            });
+          }, 1000);
+        })
+        .catch(error => {
+          console.error('Error fetching project HTML:', error);
+        });
     }
+
+
 
     function hideModal() {
       const modalOverlay = document.getElementById('modalOverlay');
       setTimeout(function () {
-        modalOverlay.style.display = 'none';    
-      }, 600);      
+        modalOverlay.style.display = 'none';
+      }, 600);
       // Enable scrolling on the body
       document.body.style.overflow = 'auto';
       modalOverlay.style.transform = 'scale(0)';
       modalOverlay.style.borderRadius = '100%';
       modalOverlay.style.height = '100vw';
+      setTimeout(function () {
+        const modal986 = document.querySelectorAll('.modal-content');
+        modal986.forEach(element => {
+          element.classList.remove('loaded');
+        });
+      }, 1000);
 
-      
-     
-      
+
+
+
     }
   </script>
 
   <!-- Modal overlay -->
   <div class="modal-overlay" id="modalOverlay">
-    <div class="modal-content" id="modalContent">
+
+    <div class="modal-content">
+      <div class="loader hhz"></div>
+      <div class="loader hhxx"></div>
+      <div class="modall-content" style="
+            width: 100%;
+            height: 100%;
+        " id="modalContent"></div>
       <!-- Content will be dynamically loaded here -->
     </div>
     <button class="modal-close" onclick="hideModal()">Close</button>
@@ -492,7 +550,7 @@
       }, 12000); // Adjust the time as needed to match the transition duration
     });
   </script>
- 
+
   <script src="lang.js"></script>
   <script src="responsive.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
