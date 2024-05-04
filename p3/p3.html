@@ -1,48 +1,84 @@
+<style scoped>
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: nowrap;
+    width: 81%;
+    height: 81%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    box-shadow: 1px 0px 9px 0px #0000004d;
+  }
 
-  <style scoped>
-    
-    .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      flex-wrap: nowrap;
-        width: 81%;
-        height: 81%;
-        margin: 50px auto;
-        padding: 20px;
-        background-color: #f1f1f1;
-        border-radius: 10px;
-        box-shadow: 1px 0px 9px 0px #0000004d;
+  h1 {
+    text-align: center;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 15px;
+  }
+
+  a {
+    font-weight: 600;
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    background-color: #004c80;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    transition: all 0.3s;
+  }
+
+  a:hover {
+    transform: scale(1.02);
+    background-color: #0056b3;
+  }
+
+  .c55s {
+
+    background-color: white;
+    overflow: auto;
+    z-index: 9999999999;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .c55s h1 {
+    font-size: 48px;
+    color: #333;
+    position: relative;
+    animation: cool-text 1s infinite alternate-reverse linear;
+  }
+
+  @keyframes cool-text {
+    0% {
+      top: 5px;
     }
-    h1 {
-      text-align: center;
+
+    100% {
+      top: -5px;
     }
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    li {
-      margin-bottom: 15px;
-    }
-    a {
-        font-weight: 600;
-        display: block;
-        padding: 10px;
-        text-decoration: none;
-        background-color: #004c80;
-        color: #fff;
-        text-align: center;
-        border-radius: 5px;
-        transition: all 0.3s;
-    }
-    a:hover {
-        transform: scale(1.02);
-        background-color: #0056b3;
-    }
-  </style>
+  }
+</style>
 </head>
 
-
+<div class="c55s">
+  <h1>قيد التطوير</h1>
+</div>
 <div class="container">
   <h1>شجرة التواصل</h1>
   <ul>
@@ -53,5 +89,3 @@
     <li><a href="https://www.twitter.com/">Twitter</a></li>
   </ul>
 </div>
-
-
